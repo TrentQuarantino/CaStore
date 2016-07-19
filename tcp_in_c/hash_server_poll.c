@@ -38,6 +38,17 @@ void stampa (const char *dato, int len) {
   printf("\n");
 }
 
+void hashtable_init (struct hashtable *self, int vect_size) {
+    struct node **buf; // vettore di puntatori ai nodi
+    buf = (struct node **)malloc(vect_size * sizeof(struct node *));
+    int i;
+    self->vect_size = vect_size;
+    self->heads = buf;
+    for (i = 0; i < vect_size; i++){
+        self->heads[i] = NULL;
+    }
+}
+
 int hash (int key) {
     return(key);
 }
@@ -145,7 +156,7 @@ int client_echo (int cfd) {
         int k_len, v_len;
 
         key = buffer + 4;
-        printf("key = %p\n", key);
+        //printf("key = %p\n", key);
 
         value = memchr(buffer + 4, ' ',rd - 4) + 1;
         k_len = (value - key) -1;
@@ -154,9 +165,9 @@ int client_echo (int cfd) {
         stampa(key, k_len);
         printf("value = ");
         stampa(value, v_len);
-        int i_key;
+        long i_key;
         i_key = strtol(key, NULL, 10);
-        printf("integer key = %d\n", i_key);
+        //printf("integer key = %d\n", i_key);
 
         hashtable_insert(&db, i_key, value, v_len);
         memcpy(buffer, "storato\n", 8);
