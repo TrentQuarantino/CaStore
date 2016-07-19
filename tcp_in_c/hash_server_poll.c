@@ -54,12 +54,21 @@ int hash (int key) {
 }
 
 void hashtable_insert (struct hashtable *self, int key, char *value, int value_length) {
-    struct node *node;
     int vect_index;
     vect_index = hash(key) % self->vect_size;
+    struct node *node;
+    for (node = self->heads[vect_index]; node != NULL; node = node->next) {
+      if (node->key == key) {
+        node->v_len = value_length;
+        memcpy(node->value, value, value_length);
+        return;
+      }
+
+    }
     node = (struct node *)malloc(sizeof(struct node));
-    node->key = key;
     node->next = self->heads[vect_index];
+    node->key = key;
+    node->v_len = value_length;
     memcpy(node->value, value, value_length);
     self->heads[vect_index] = node;
 }
@@ -165,7 +174,7 @@ int client_echo (int cfd) {
         stampa(key, k_len);
         printf("value = ");
         stampa(value, v_len);
-        long i_key;
+        int i_key;
         i_key = strtol(key, NULL, 10);
         //printf("integer key = %d\n", i_key);
 
