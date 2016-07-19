@@ -1,5 +1,6 @@
 //https://en.wikipedia.org/wiki/Hash_table
 //http://eternallyconfuzzled.com/tuts/datastructures/jsw_tut_hashtable.aspx
+//http://www.ateneonline.it/hyperbook/c_book/C1208.htm
 #include <netinet/tcp.h>
 #include <netinet/in.h>
 #include <sys/socket.h>
