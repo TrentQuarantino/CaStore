@@ -63,7 +63,6 @@ void hashtable_insert (struct hashtable *self, int key, char *value, int value_l
         memcpy(node->value, value, value_length);
         return;
       }
-
     }
     node = (struct node *)malloc(sizeof(struct node));
     node->next = self->heads[vect_index];
@@ -79,12 +78,13 @@ char *hashtable_get (struct hashtable *self, int key, int *v_len) {
     v_index = hash(key) % self->vect_size;
     for (node = self->heads[v_index]; node != NULL; node = node->next) {
         if (node->key == key) {
+            *v_len = node->v_len;
             return(node->value);
         }
     }
+    *v_len = 11;
     return("non trovato");
 }
-
 
 int create_server (int port) {
     int srv_fd;
@@ -118,7 +118,6 @@ void server_loop (int srv_fd, client_func_t c_func) {
             perror("poll()");
             continue;
         }
-
         // qualcuno si e' connesso
         if (fds[0].revents & POLLIN) {
             int cfd = accept(srv_fd, (struct sockaddr*) NULL, NULL);
@@ -201,6 +200,7 @@ int client_echo (int cfd) {
 }
 
 int main (int argc, char **argv) {
+    hashtable_init(&db, 16);
     int srv_fd;
     srv_fd = create_server(11124);
     server_loop(srv_fd, client_echo);
