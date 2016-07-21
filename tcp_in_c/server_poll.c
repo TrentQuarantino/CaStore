@@ -78,7 +78,9 @@ int main (int argc, char **argv) {
                 }
                 printf(" - letto dal client %d: ", cfd);
                 stampa(buffer, rd);
-                write(cfd, buffer, rd);
+                for (int j = 1; j < fd_count; ++j) {
+                    write(fds[j].fd, buffer, rd);
+                }
             }
         }
     }
