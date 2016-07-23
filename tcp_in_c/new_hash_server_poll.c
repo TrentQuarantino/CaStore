@@ -121,7 +121,7 @@ void log_replay (int fd, struct hashtable *db) {
 
 void log_insert (int fd, char *key, char *value, int k_len, int v_len) {
     write(fd, &k_len, sizeof(int));
-    write(fd, &k_len, sizeof(int));
+    write(fd, &v_len, sizeof(int));
     write(fd, key, k_len);
     write(fd, value, v_len);
 }
