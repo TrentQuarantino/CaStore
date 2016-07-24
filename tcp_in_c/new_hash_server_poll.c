@@ -221,7 +221,15 @@ int client_echo (int cfd) {
         char *g_key, *g_value;
         int g_key_len, v_len;
         g_key = buffer + 4;
-        g_key_len = rd - 4;
+        g_key_len = (rd - 4);
+        if (g_key[(g_key_len)-1] == '\n') {
+            g_key_len -= 1;
+        }
+        if (g_key[(g_key_len)-1] == '\r') {
+            g_key_len -= 1;
+        }
+        printf("----g_key_len = %d\n", g_key_len);
+        stampa(g_key, g_key_len);
 
         g_value = hashtable_get(&db, g_key, g_key_len, &v_len);
         memcpy(buffer, g_value, v_len);
