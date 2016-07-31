@@ -7,8 +7,8 @@
 #include <unistd.h>
 
 int create_client (int port, char *hostis) {
-	int cfd;
-	struct sockaddr_in servaddr;
+    int cfd;
+    struct sockaddr_in servaddr;
 
     cfd = socket(AF_INET, SOCK_STREAM, 0);
     bzero(&servaddr, sizeof(servaddr));
@@ -25,7 +25,7 @@ int create_client (int port, char *hostis) {
 }
 
 int create_client_loop (int cfd) {
-	char sendline[128];
+    char sendline[128];
     char recvline[128];
 
     while(1) {
@@ -42,9 +42,9 @@ int create_client_loop (int cfd) {
 }
 
 int main (int argc, char **argv) {
-	int port = 11124;
+	int cfd;
     char hostis[] = "127.0.0.1";
-    int cfd;
+    int port = 11124;
 
     cfd = create_client(port, hostis);
     create_client_loop(cfd);
