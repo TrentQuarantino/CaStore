@@ -43,7 +43,7 @@ int create_client_loop (int cfd) {
 
 int main (int argc, char **argv) {
     int cfd;
-    char hostis[] = "127.0.0.1";
+    char hostis[] = "127.0.0.1"; //host
     int port = 11124;
 
     cfd = create_client(port, hostis);
