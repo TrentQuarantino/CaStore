@@ -1,3 +1,4 @@
+//http://www.dis.uniroma1.it/~liberato/struct/typestruct/strutture.shtml
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netdb.h>
@@ -5,13 +6,10 @@
 #include <string.h>
 #include <unistd.h>
 
-struct rubrica {
-    char nome[32];
-    char cognome[32];
-    char via[32];
-    char civico[4];
-    char citta[32];
-    char cell[16];
+struct libro {
+    char titolo[32];
+    char autore[32];
+    int anno;
 };
 
 int main (int argc, char **argv) {
@@ -29,7 +27,7 @@ int main (int argc, char **argv) {
 
     connect(sockfd, (struct sockaddr *)&servaddr, sizeof(servaddr));
 
-    //#if 0
+    #if 0
     while(1) {
         bzero(sendline, 128);
         bzero(recvline, 128);
@@ -40,7 +38,7 @@ int main (int argc, char **argv) {
 
         printf("%s", recvline);
     }
-    /*#else
+    #else
     struct libro lassie;
     memset(&lassie, 0, sizeof(struct libro));
     memcpy(lassie.titolo, "lessie titulo", 13);
@@ -50,6 +48,8 @@ int main (int argc, char **argv) {
     ssize_t buf_len;
 
     memcpy(buffer,"put culo ", 9);
+    //memcpy(buffer, "put ", 4);
+    //memcpy(buffer + 4, lassie.titolo, strlen(lassie.titolo));
     memcpy(buffer + 9, &lassie, sizeof(struct libro));
 
     write(sockfd, buffer, sizeof(struct libro) + 9);
@@ -63,7 +63,7 @@ int main (int argc, char **argv) {
     memset(&lassie, 0, sizeof(struct libro));
     memcpy(&lassie, buffer, sizeof(struct libro));
     printf("titolo %s\nautore %s\nanno %d\n", lassie.titolo, lassie.autore, lassie.anno);
-    #endif*/
+    #endif
 
     close(sockfd);
     return(0);
