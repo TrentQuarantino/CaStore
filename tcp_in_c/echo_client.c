@@ -44,15 +44,15 @@ int main (int argc, char **argv) {
     memcpy(lassie.titolo, "lessie titulo", 13);
     memcpy(lassie.autore, "Tito lo lungo", 13);
     lassie.anno = 1950;
+
     char buffer[128];
     ssize_t buf_len;
 
     memcpy(buffer,"put culo ", 9);
-    //memcpy(buffer, "put ", 4);
-    //memcpy(buffer + 4, lassie.titolo, strlen(lassie.titolo));
     memcpy(buffer + 9, &lassie, sizeof(struct libro));
 
-    write(sockfd, buffer, sizeof(struct libro) + 9);
+
+    write(sockfd, buffer, sizeof(struct rubrica) + 9);
     memset(buffer, 0, sizeof(buffer));
     buf_len = read(sockfd, buffer, sizeof(buffer));
     printf("%s", buffer);
@@ -60,6 +60,7 @@ int main (int argc, char **argv) {
     memcpy(buffer, "get culo", 8);
     write(sockfd, buffer, 8);
     buf_len = read(sockfd, buffer, sizeof(buffer));
+
     memset(&lassie, 0, sizeof(struct libro));
     memcpy(&lassie, buffer, sizeof(struct libro));
     printf("titolo %s\nautore %s\nanno %d\n", lassie.titolo, lassie.autore, lassie.anno);
