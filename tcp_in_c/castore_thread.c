@@ -34,7 +34,9 @@ struct client {
 };
 
 char html[] = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n<html><body>asino"
-              "<img src='http://www.w3schools.com/images/lamp.jpg'></body></html>";
+              "<img src='http://www.w3schools.com/images/lamp.jpg'><p id='demo'></p></body></html>"
+              "<script>document.getElementById('demo').innerHTML = Date();</script>"
+              "</body></html>";
 
 void hashtable_init (struct hashtable *self, int vect_size) {
     pthread_mutex_init(&(self->mutex), NULL);
@@ -155,7 +157,7 @@ void stampa (const char *dato, int len) {
 }
 
 void client_loop (int cfd) {
-    char buffer[128];
+    char buffer[2048];
 
     while (1) {
         ssize_t rd;
