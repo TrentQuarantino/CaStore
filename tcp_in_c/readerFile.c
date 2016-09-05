@@ -15,10 +15,10 @@ int readfile_init ( const char *filename) {
 }
 
 void readonly (int fd) {
-    char html[128];
+    char html[MAX_BUF];
     int letten;
     int tot = 0;
-    while ((letten = read(fd, html, 128)) > 0) {
+    while ((letten = read(fd, html, MAX_BUF)) > 0) {
         tot += letten;
         html[letten] = '\0';
         write(1, html, letten);
