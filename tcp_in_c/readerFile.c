@@ -19,16 +19,13 @@ void readonly (int fd) {
     int letten;
     int tot = 0;
     while ((letten = read(fd, html, MAX_BUF)) > 0) {
-        tot += letten;
-        html[letten] = '\0';
         write(1, html, letten);
     }
-    printf("tot %d\n", tot);
 }
 
 int main(int argc, char **argv) {
     int fd;
-    fd = readfile_init("pag_html");
+    fd = readfile_init("page_html");
     readonly(fd);
     close(fd);
 }
