@@ -83,7 +83,6 @@ void server_loop (int srv_fd, client_func_t c_func) {
             fds[fd_count].events = POLLIN;
             fd_count++;
         } else {
-
             printf("SCAN FOR READ fda=%d\n", fd_count);
             for (int i = 1; i < fd_count; ++i) {
                 int cfd = fds[i].fd;
