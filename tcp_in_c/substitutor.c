@@ -10,36 +10,21 @@ void printa (const char *dato, int len) {
 }
 int main () {
    const char src[256] = "mao%40mao.it";
-   char first[256];
-   char last[256];
-   char sub[4];
    char substitute[] = "@";
    char dest[256];
    char *ret;
-   int len,len1,len2;
+   int len;
    int diff;
 
    len = strlen(src);
-   printf("len %d\n", len);
    ret = memchr(src, '%', len);
-   len1 = strlen(ret);
-   printf("ret len %d\n", len1);
-   printf("ret = ");
-   printa(ret, len1);
    diff = ret - src;
-   printf("diff %d\n", diff);
-   memcpy(last, ret + 3, len - diff);
-   memcpy(first, src, diff);
-   memcpy(sub, ret, 3);
-   //strcat(last, src);
-   len1 = strlen(last);
-   printf("last = ");
-   printa(last, len-diff);
-   memcpy(dest, first, strlen(first));
-   printf("dest %s\n", dest);
-   memcpy(dest + strlen(first), substitute, 1);
-   printf("dest %s\n", dest);
-   memcpy(dest + strlen(first) + 1, last, len1+4);
-   printf("dest %s\n",dest);
+
+   memcpy(dest, src, diff);
+   printa(dest, diff);
+   memcpy(dest + diff, substitute, 1);
+   printa(dest, diff +1);
+   memcpy(dest + diff + 1, ret+3, len-diff-3);
+   printa(dest, len - diff +1);
    return(0);
 }
