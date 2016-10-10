@@ -25,6 +25,6 @@ int main () {
    memcpy(dest + diff, substitute, 1);
    printa(dest, diff +1);
    memcpy(dest + diff + 1, ret+3, len-diff-3);
-   printa(dest, len - diff +1);
+   printa(dest, len - 3 +1);
    return(0);
 }
