@@ -39,3 +39,7 @@ int main(int argc, char **argv) {
     diff2 = (ret6 -ret5) - 1;
     stampa(ret5, diff2);
 }
+/*char *symboli[] = { "%%40", "@", ...}
+for (i = 0; i < ...; i += 2)
+if (strcmp(x, simboli[i], ...
+sostituisci(x, simboli[i + 1])*/
